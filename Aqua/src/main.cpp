@@ -33,7 +33,8 @@ static bool isDownloaded = false;
 
 DWORD no_bg = ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoBackground;
 
-void downloadIMG() {
+void downloadIMG()
+{
 
     ImGuiIO io;
 
@@ -50,7 +51,8 @@ void downloadIMG() {
 
 bool LoadTextureFromFile(const char* filename, PDIRECT3DTEXTURE9* out_texture, int* out_width, int* out_height);
 
-void style() {
+void style() 
+{
 
     ImGuiStyle& style = ImGui::GetStyle();
     ImVec4* colors = style.Colors;
