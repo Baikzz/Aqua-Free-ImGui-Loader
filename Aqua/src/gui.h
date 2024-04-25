@@ -13,7 +13,8 @@ float rounding = 20.0f;
 ImVec2 start = { 50, 50 };
 ImVec2 img_size = { 30, 30 };
 
-namespace c_gui {
+namespace c_gui
+{
 
     class gui 
 {
