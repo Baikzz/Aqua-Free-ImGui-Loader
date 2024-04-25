@@ -53,7 +53,8 @@ static bool isDownloaded = false;
 
 DWORD no_bg = ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoBackground;
 
-void downloadIMG() {
+void downloadIMG()
+{
 
     ImGuiIO io;
 
