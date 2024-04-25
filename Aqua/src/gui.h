@@ -15,7 +15,8 @@ ImVec2 img_size = { 30, 30 };
 
 namespace c_gui {
 
-    class gui {
+    class gui 
+{
     public:
         DWORD window_flags = ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoSavedSettings;
         ImGuiStyle& style = ImGui::GetStyle();
@@ -129,12 +130,12 @@ namespace c_gui {
             static ImVec2 particleVelocities[numParticles];
             static bool initialized = false;
 
-            // Dimensiones fijas del área de dibujo
-            static const ImVec2 drawAreaPos(10, 10);  // Posición superior izquierda del área de dibujo
-            static const ImVec2 drawAreaSize(1280, 960); // Tamaño del área de dibujo
+            // Dimensiones fijas del Ã¡rea de dibujo
+            static const ImVec2 drawAreaPos(10, 10);  // PosiciÃ³n superior izquierda del Ã¡rea de dibujo
+            static const ImVec2 drawAreaSize(1280, 960); // TamaÃ±o del Ã¡rea de dibujo
 
             if (!initialized) {
-                // Inicializar las partículas dentro del área de dibujo
+                // Inicializar las partÃ­culas dentro del Ã¡rea de dibujo
                 for (int i = 0; i < numParticles; ++i) {
                     particlePositions[i] = ImVec2(
                         drawAreaPos.x + drawAreaSize.x * static_cast<float>(rand()) / RAND_MAX,
@@ -152,7 +153,7 @@ namespace c_gui {
             ImVec2 cursorPos = ImGui::GetIO().MousePos;
 
             for (int i = 0; i < numParticles; ++i) {
-                // Dibujar líneas a otras partículas
+                // Dibujar lÃ­neas a otras partÃ­culas
                 for (int j = i + 1; j < numParticles; ++j) {
                     float distance = std::hypotf(particlePositions[j].x - particlePositions[i].x, particlePositions[j].y - particlePositions[i].y);
                     float opacity = 1.0f - (distance / 2.0f);  // Cambiar opacidad
@@ -163,7 +164,7 @@ namespace c_gui {
                     }
                 }
 
-                // Dibujar líneas al cursor
+                // Dibujar lÃ­neas al cursor
                 float distanceToCursor = std::hypotf(cursorPos.x - particlePositions[i].x, cursorPos.y - particlePositions[i].y);
                 float opacityToCursor = 1.0f - (distanceToCursor / 30.0f);  // Ajustar divisor para controlar cambio de opacidad
 
@@ -173,13 +174,13 @@ namespace c_gui {
                 }
             }
 
-            // Actualizar y renderizar partículas
+            // Actualizar y renderizar partÃ­culas
             float deltaTime = ImGui::GetIO().DeltaTime;
             for (int i = 0; i < numParticles; ++i) {
                 particlePositions[i].x += particleVelocities[i].x * deltaTime;
                 particlePositions[i].y += particleVelocities[i].y * deltaTime;
 
-                // Mantener dentro del área de dibujo
+                // Mantener dentro del Ã¡rea de dibujo
                 if (particlePositions[i].x < drawAreaPos.x)
                     particlePositions[i].x = drawAreaPos.x + drawAreaSize.x;
                 else if (particlePositions[i].x > drawAreaPos.x + drawAreaSize.x)
