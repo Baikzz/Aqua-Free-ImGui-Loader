@@ -70,7 +70,8 @@ void downloadIMG() {
 
 bool LoadTextureFromFile(const char* filename, PDIRECT3DTEXTURE9* out_texture, int* out_width, int* out_height);
 
-void style() {
+void style() 
+{
 
     ImGuiStyle& style = ImGui::GetStyle();
     ImVec4* colors = style.Colors;
