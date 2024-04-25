@@ -1,11 +1,3 @@
-// Dear ImGui: standalone example application for DirectX 9
-
-// Learn about Dear ImGui:
-// - FAQ                  https://dearimgui.com/faq
-// - Getting Started      https://dearimgui.com/getting-started
-// - Documentation        https://dearimgui.com/docs (same as your local docs/ folder).
-// - Introduction, links and more at the top of imgui.cpp
-
 #include "imgui.h"
 #include "imgui_impl_dx9.h"
 #include "imgui_impl_win32.h"
@@ -19,18 +11,6 @@
 #include <thread>
 #pragma comment(lib, "D3dx9")
 #pragma comment(lib,"d3dx9.lib")
-
-
-//auto window = GetCurrentWindow();
-//auto draw = window->DrawList;
-//auto pos = window->Pos;
-//auto size = window->Size;
-//auto style = GetStyle();
-
-//GetBackgroundDrawList()->AddImage(bg, ImVec2(0, 0), io.DisplaySize);
-
-//const auto& pWindowDrawList = ImGui::GetWindowDrawList();
-//DrawBackgroundBlur(pWindowDrawList, g_pd3dDevice);
 
 IDirect3DTexture9* pfp{ };
 
@@ -243,7 +223,7 @@ int main(int, char**)
 
                     if (gui->button("SPOOF", 300, 30, 50, childSize.y - 75))
                     {
-
+                        ImGui::InsertNotification({ ImGuiToastType_None, 3000, "Succesfully logged!" });
                     }
 
                     if (gui->button("CHECK SERIALS", 145, 30, 50, childSize.y - 37.5)) 

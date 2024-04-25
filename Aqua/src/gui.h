@@ -2,6 +2,9 @@
 #include <iostream>
 #include "aqua_var.h"
 #include <D3dx9tex.h>
+#include "imgui_notify.h"
+#pragma comment(lib, "dxguid.lib")
+#include <ctime>
 #pragma comment(lib, "D3dx9")
 
 using namespace ImGui;
@@ -115,6 +118,7 @@ namespace c_gui {
             ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.0157, 0.3608, 0.5882, 1.0)); //NORMAL BUTTON COLOR
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.0118, 0.5765, 0.8392, 1.0)); //HOVERED BUTTON COLOR
             ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(0.23, 0.23, 0.23, 0.3)); //CHILD BG
+            ImGui::RenderNotifications(); // Renders the notifications, i used https://github.com/patrickcjk/imgui-notify
             style.FrameRounding = 5.0f; //FRAME ROUNDING FOR ALL ITEMS
             style.WindowRounding = 10.0f; //WINDOW ROUNDING
             style.ChildRounding = 10.0f; // CHILD ROUNDING

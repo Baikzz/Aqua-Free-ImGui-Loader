@@ -153,6 +153,9 @@
     <ClInclude Include="ext\more\blur.hpp" />
     <ClInclude Include="ext\more\blur_x.h" />
     <ClInclude Include="ext\more\blur_y.h" />
+    <ClInclude Include="ext\more\fa_solid_900.h" />
+    <ClInclude Include="ext\more\font_awesome_5.h" />
+    <ClInclude Include="ext\more\imgui_notify.h" />
     <ClInclude Include="src\aqua_var.h" />
     <ClInclude Include="src\gui.h" />
     <ClInclude Include="src\settings.h" />
