@@ -12,7 +12,10 @@
 #pragma comment(lib, "D3dx9")
 #pragma comment(lib,"d3dx9.lib")
 
+
 IDirect3DTexture9* pfp{ };
+IDirect3DTexture9* fn{ };
+IDirect3DTexture9* rust{ };
 
 // Data
 static LPDIRECT3D9              g_pD3D = nullptr;
@@ -90,9 +93,6 @@ int main(int, char**)
     ImGui_ImplWin32_Init(hwnd);
     ImGui_ImplDX9_Init(g_pd3dDevice);
 
-    // Our state
-    bool show_demo_window = true;
-    bool show_another_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
     // Main loop
@@ -134,9 +134,6 @@ int main(int, char**)
 
         ImGui::NewFrame();
 
-
-
-
         style();
 
         ////////////////////////////////////////////////////////////////
@@ -157,9 +154,16 @@ int main(int, char**)
             D3DXCreateTextureFromFileInMemoryEx(g_pd3dDevice, &pfp_raw, sizeof pfp_raw, 30, 30, D3DX_DEFAULT, 0,
                 D3DFMT_UNKNOWN, D3DPOOL_DEFAULT, D3DX_DEFAULT, D3DX_DEFAULT, 0, NULL, NULL, &pfp);
 
+        if (!fn)
+            D3DXCreateTextureFromFileInMemoryEx(g_pd3dDevice, &fn_logo, sizeof fn_logo, 30, 30, D3DX_DEFAULT, 0,
+                D3DFMT_UNKNOWN, D3DPOOL_DEFAULT, D3DX_DEFAULT, D3DX_DEFAULT, 0, NULL, NULL, &fn);
+
+        if (!rust)
+            D3DXCreateTextureFromFileInMemoryEx(g_pd3dDevice, &rust_logo, sizeof rust_logo, 30, 30, D3DX_DEFAULT, 0,
+                D3DFMT_UNKNOWN, D3DPOOL_DEFAULT, D3DX_DEFAULT, D3DX_DEFAULT, 0, NULL, NULL, &rust);
+
        GetBackgroundDrawList()->AddImage(bg, ImVec2(0, 0), io.DisplaySize);
 
-        gui->applyStyle();
         gui->begin("test", 350, 400);
         {
             gui->psFont();
@@ -167,25 +171,33 @@ int main(int, char**)
 
             if (!logged) 
             {
+                gui->opp();
+
                 ImVec2 windowSize = ImGui::GetWindowSize();
                 auto window = GetCurrentWindow();
                 auto size = window->Size;
 
                 gui->particles();
                 gui->setpos(80, 10);
-                Image((void*)my_texture, ImVec2(200, 200));
 
-                gui->hintInput("", "User", user, 65, 180);
-                gui->hintInputPass("", "Pass", pass, 65, 230);
+                Image((void*)my_texture, ImVec2(200, 200)); //<- Loads a texture from file
+
+                gui->hintInput("", "User", user, sizeof(user), 65, 180);
+                gui->hintInputPass("", "Pass", pass, sizeof(pass), 65, 230);
 
                 if (gui->button("Login", 225, 30, 65, windowSize.y - 85))
                 {
                     logged = !logged;
+                    gui->noopp();
                 }
             }
 
             if (logged)
             {
+                gui->sws(500, 400);
+
+                gui->opp();
+
                 gui->particles();
 
                 ImVec2 windowSize = ImGui::GetWindowSize();
@@ -194,52 +206,83 @@ int main(int, char**)
                 auto pos = window->Pos;
                 auto draw = window->DrawList;
 
-                gui->sws(500, 350);
-
-                gui->child("userChild", 150, 50, windowSize.x - 200, windowSize.y - 320);
+                gui->child("userChild", 150, 50, windowSize.x - 200, windowSize.y - 350, childopp);
                 {
                     ImVec2 childSize = ImGui::GetWindowSize();
 
-                    draw->AddImageRounded(pfp, ImVec2(pos.x + 415, pos.y + 40), ImVec2(pos.x + 415 + img_size.x, pos.y + 40 + img_size.y), ImVec2(0, 0), ImVec2(1, 1), IM_COL32_WHITE, rounding); // <- pfp
+                    draw->AddImageRounded(pfp, ImVec2(pos.x + 410, pos.y + 60), ImVec2(pos.x + 410 + img_size.x, pos.y + 60 + img_size.y), ImVec2(0, 0), ImVec2(1, 1), IM_COL32_WHITE, rounding); // <- pfp from memory
 
-                    gui->text("Baikzz # 0", 10, 5); // <- Discord id or whatever
-                    gui->text("3!N1G6Aw524!", 10, 25); //<- Token or something, idk
+                    gui->cText(user, 10, 5, white, 0.63);
+                    gui->cText("3!N1G6Aw524!", 10, 25, white, 0.63); //<- Token or something, idk
                 }
                 gui->endChild();
 
-                gui->child("infoChild", 200, 50, windowSize.x - 450, windowSize.y - 320);
+                //CAMBIAR FOTO DE POSICION Y
+
+                gui->child("infoChild", 200, 50, windowSize.x - 450, windowSize.y - 350, childopp);
                 {
                     ImVec2 childSize = ImGui::GetWindowSize();
 
-                    gui->bText("Time left: ", 10, 5);
-                    gui->bText("Version: ", 10, 25);
+                    gui->cText("Time left: ", 10, 5, blue, 0.63);
+                    gui->cText("Version: ", 10, 25, blue, 0.63);
 
-                    gui->text("29d", childSize.x - 40, 5);
-                    gui->text("2.3", childSize.x - 40, 25);
+                    gui->cText("29d", childSize.x - 40, 5, white, 0.63);
+                    gui->cText("2.3", childSize.x - 40, 25, white, 0.63);
                 }
                 gui->endChild();
 
-                gui->child("mainChild", 400, 200, 50, windowSize.y - 230);
+                gui->child("mainChild", 400, 210, 50, windowSize.y - 260, childopp);
                 {
                     ImVec2 childSize = ImGui::GetWindowSize();
 
-                    if (gui->button("SPOOF", 300, 30, 50, childSize.y - 75))
+                    if (gui->ibutton("fn", 55, 20, 50, 5, fn, button1Active))
                     {
-                        ImGui::InsertNotification({ ImGuiToastType_None, 3000, "Succesfully logged!" });
+                        button1Active = true;
+                        button2Active = false;
+                        gui->noopp();
+                        page = 1;
                     }
 
-                    if (gui->button("CHECK SERIALS", 145, 30, 50, childSize.y - 37.5)) 
+                    if (gui->ibutton("rust", childSize.x - 195, 20, 55, 5, rust, button2Active))
                     {
-
-                    } 
-
-                    if (gui->button("TEMP SPOOF", 145, 30, 205, childSize.y - 37.5)) 
-                    {
-
+                        button1Active = false;
+                        button2Active = true;
+                        gui->noopp();
+                        page = 2;
                     }
 
-                    gui->bText("Status", childSize.x - 270, 10);
-                    gui->text("UD (Ultra Detected)", childSize.x - 220, 10);
+                    gui->child("infoChild2", 295, 55, 53, 80, mchildopp);
+                    ImVec2 childSize1 = ImGui::GetWindowSize();
+                    gui->end();
+
+                    switch (page)
+                    {
+                        case 1:
+                            gui->opp();
+
+                            gui->cText("Status", 60, 85, blue, 0.63);
+                            gui->cText("UD", childSize1.x - 45, 85, green, 0.63);
+
+                            gui->cText("Ban chance", 60, 110, blue, 0.63);
+                            gui->cText("5.4%%", childSize1.x - 45, 110, white, 0.63);
+
+                            gui->button("Load", 295, 30, 53.2, childSize.y - 50);
+
+                            break;
+
+                        case 2:
+                            gui->opp();
+
+                            gui->cText("Status", 60, 85, blue, 0.63);
+                            gui->cText("DTC", childSize1.x - 45, 85, red, 0.63);
+
+                            gui->cText("Ban chance", 60, 110, blue, 0.63);
+                            gui->cText("97.4%%", childSize1.x - 45, 110, white, 0.63);
+
+                            gui->button("Load", 295, 30, 53.2, childSize.y - 50);
+
+                            break;
+                    }
                 }
                 gui->endChild();
             }
@@ -400,11 +443,6 @@ void ResetDevice()
 // Forward declare message handler from imgui_impl_win32.cpp
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
-
-bool InputWHint(const char* label, const char* hint, char input[20], size_t bufferSize) {
-    return ImGui::InputTextWithHint(label, hint, input, bufferSize);
-}
-
 bool LoadTextureFromFile(const char* filename, PDIRECT3DTEXTURE9* out_texture, int* out_width, int* out_height)
 {
     // Load texture from disk
@@ -422,11 +460,6 @@ bool LoadTextureFromFile(const char* filename, PDIRECT3DTEXTURE9* out_texture, i
     return true;
 }
 
-// Win32 message handler
-// You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to tell if dear imgui wants to use your inputs.
-// - When io.WantCaptureMouse is true, do not dispatch mouse input data to your main application, or clear/overwrite your copy of the mouse data.
-// - When io.WantCaptureKeyboard is true, do not dispatch keyboard input data to your main application, or clear/overwrite your copy of the keyboard data.
-// Generally you may always pass all inputs to dear imgui, and hide them from your application based on those two flags.
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))

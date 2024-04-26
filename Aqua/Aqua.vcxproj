@@ -76,6 +76,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Baikzz\Desktop\repos\Aqua\Aqua\ext\more\fonts;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -90,6 +91,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Baikzz\Desktop\repos\Aqua\Aqua\ext\more\fonts;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -104,6 +106,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Baikzz\Desktop\repos\Aqua\Aqua\ext\more\fonts;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -119,7 +122,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;C:\Users\Baikzz\Desktop\repos\Aqua\Aqua\ext\imgui;C:\Users\Baikzz\Desktop\repos\Aqua\Aqua\ext\more;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Baikzz\Desktop\repos\Aqua\Aqua\ext\more\fonts;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;C:\Users\Baikzz\Desktop\repos\Aqua\Aqua\ext\imgui;C:\Users\Baikzz\Desktop\repos\Aqua\Aqua\ext\more;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -153,9 +156,6 @@
     <ClInclude Include="ext\more\blur.hpp" />
     <ClInclude Include="ext\more\blur_x.h" />
     <ClInclude Include="ext\more\blur_y.h" />
-    <ClInclude Include="ext\more\fa_solid_900.h" />
-    <ClInclude Include="ext\more\font_awesome_5.h" />
-    <ClInclude Include="ext\more\imgui_notify.h" />
     <ClInclude Include="src\aqua_var.h" />
     <ClInclude Include="src\gui.h" />
     <ClInclude Include="src\settings.h" />
