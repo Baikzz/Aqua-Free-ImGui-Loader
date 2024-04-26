@@ -12,6 +12,7 @@
 #pragma comment(lib, "D3dx9")
 #pragma comment(lib,"d3dx9.lib")
 
+//CHANGE THE WALLPAPER!!! DOWNLOAD A COOL WALLPAPER, RENAME IT AS WALLPAPER.PNG AND MOVE IT TO C:\WALLPAPER
 
 IDirect3DTexture9* pfp{ };
 IDirect3DTexture9* fn{ };
@@ -35,22 +36,6 @@ IDirect3DTexture9* bg{ };
 static bool isDownloaded = false;
 
 DWORD no_bg = ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoBackground;
-
-void downloadIMG()
-{
-
-    ImGuiIO io;
-
-    float deltaTime = 100.0f;
-
-    io.DeltaTime = deltaTime;
-
-    if (!isDownloaded) {
-
-        system("curl -o C:\\logo.png https://files.catbox.moe/w8aizs.png");
-        isDownloaded = !isDownloaded;
-    }
-}
 
 bool LoadTextureFromFile(const char* filename, PDIRECT3DTEXTURE9* out_texture, int* out_width, int* out_height);
 
