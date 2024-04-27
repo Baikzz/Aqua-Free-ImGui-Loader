@@ -31,7 +31,7 @@ static float itemopp = 0;
 static float childopp = 0;
 static float mchildopp = 0;
 static float buttonopp = 0;
-
+static float opacityText = 0;
 
 static ImVec4 blue = { 0.0157, 0.3608, 0.5882, textopp };
 static ImVec4 white = { 1, 1, 1, textopp };

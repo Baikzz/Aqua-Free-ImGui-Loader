@@ -151,6 +151,9 @@ int main(int, char**)
 
         gui->begin("test", 350, 400);
         {
+            float targetOpacityText = (button1Active != button2Active) ? 1.f : 0.f;
+            opacityText = ImLerp(opacityText, targetOpacityText, 0.05f);
+
             gui->psFont();
             DrawBackgroundBlur(pWindowDrawList, g_pd3dDevice);
 
@@ -222,6 +225,7 @@ int main(int, char**)
 
                     if (gui->ibutton("fn", 55, 20, 50, 5, fn, button1Active))
                     {
+                        opacityText = 0.f;
                         button1Active = true;
                         button2Active = false;
                         gui->noopp();
@@ -230,6 +234,7 @@ int main(int, char**)
 
                     if (gui->ibutton("rust", childSize.x - 195, 20, 55, 5, rust, button2Active))
                     {
+                        opacityText = 0.f;
                         button1Active = false;
                         button2Active = true;
                         gui->noopp();
@@ -240,34 +245,41 @@ int main(int, char**)
                     ImVec2 childSize1 = ImGui::GetWindowSize();
                     gui->end();
 
+                    
                     switch (page)
                     {
                         case 1:
                             gui->opp();
 
+                            ImGui::PushStyleVar(ImGuiStyleVar_Alpha, opacityText);
                             gui->cText("Status", 60, 85, blue, 0.63);
                             gui->cText("UD", childSize1.x - 45, 85, green, 0.63);
 
                             gui->cText("Ban chance", 60, 110, blue, 0.63);
                             gui->cText("5.4%%", childSize1.x - 45, 110, white, 0.63);
+                            ImGui::PopStyleVar();
 
                             gui->button("Load", 295, 30, 53.2, childSize.y - 50);
+                           
 
                             break;
 
                         case 2:
                             gui->opp();
 
+                            ImGui::PushStyleVar(ImGuiStyleVar_Alpha, opacityText);
                             gui->cText("Status", 60, 85, blue, 0.63);
                             gui->cText("DTC", childSize1.x - 45, 85, red, 0.63);
 
                             gui->cText("Ban chance", 60, 110, blue, 0.63);
                             gui->cText("97.4%%", childSize1.x - 45, 110, white, 0.63);
+                            ImGui::PopStyleVar();
 
                             gui->button("Load", 295, 30, 53.2, childSize.y - 50);
 
                             break;
                     }
+                
                 }
                 gui->endChild();
             }
