@@ -38,18 +38,6 @@ DWORD no_bg = ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoCollapse | ImGui
 
 bool LoadTextureFromFile(const char* filename, PDIRECT3DTEXTURE9* out_texture, int* out_width, int* out_height);
 
-void style() 
-{
-
-    ImGuiStyle& style = ImGui::GetStyle();
-    ImVec4* colors = style.Colors;
-
-    colors[ImGuiCol_WindowBg] = ImVec4(23.0f / 255, 23.0f / 255, 23.0f / 255, 0.87);
-    colors[ImGuiCol_ChildBg] = ImVec4(23.0f / 255, 23.0f / 255, 23.0f / 255, 1.0f);
-    colors[ImGuiCol_BorderShadow] = ImVec4( 0.0f, .0f, 0.0f, 1.0f);
-    style.WindowRounding = 12.0f;
-}
-
 int main(int, char**)
 {
     WNDCLASSEXW wc = { sizeof(wc), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(nullptr), nullptr, nullptr, nullptr, nullptr, L"ImGui Example", nullptr };
@@ -117,8 +105,6 @@ int main(int, char**)
 
 
         ImGui::NewFrame();
-
-        style();
 
         ////////////////////////////////////////////////////////////////
         /**/ ImGui::Begin("blur", NULL, no_bg);                       //  <- Only way to setup blur correctly i found, it bugs if you aply it to
@@ -195,9 +181,13 @@ int main(int, char**)
 
                 gui->child("userChild", 150, 50, windowSize.x - 200, windowSize.y - 350, childopp);
                 {
+                    ImVec2 childPos = ImGui::GetWindowPos();
                     ImVec2 childSize = ImGui::GetWindowSize();
 
-                    draw->AddImageRounded(pfp, ImVec2(pos.x + 410, pos.y + 60), ImVec2(pos.x + 410 + img_size.x, pos.y + 60 + img_size.y), ImVec2(0, 0), ImVec2(1, 1), IM_COL32_WHITE, rounding); // <- pfp from memory
+                    float posX = childPos.x + 105;
+                    float posY = childPos.y + (childSize.y - img_size.y) / 2;
+
+                    draw->AddImageRounded(pfp, ImVec2(posX, posY), ImVec2(posX + img_size.x, posY + img_size.y), ImVec2(0, 0), ImVec2(1, 1), IM_COL32_WHITE, rounding); // <- pfp from memory
 
                     gui->cText(user, 10, 5, white, 0.63);
                     gui->cText("3!N1G6Aw524!", 10, 25, white, 0.63); //<- Token or something, idk
@@ -240,6 +230,8 @@ int main(int, char**)
                         page = 2;
                     }
 
+                    gui->button("Load", 295, 30, 53.2, childSize.y - 50);
+
                     gui->child("infoChild2", 295, 55, 53, 80, mchildopp);
                     ImVec2 childSize1 = ImGui::GetWindowSize();
                     gui->end();
@@ -256,11 +248,7 @@ int main(int, char**)
 
                             gui->cText("Ban chance", 60, 110, blue, 0.63);
                             gui->cText("5.4%%", childSize1.x - 45, 110, white, 0.63);
-                            ImGui::PopStyleVar();
-
-                            gui->button("Load", 295, 30, 53.2, childSize.y - 50);
-                           
-
+                            ImGui::PopStyleVar();                           
                             break;
 
                         case 2:
@@ -273,12 +261,8 @@ int main(int, char**)
                             gui->cText("Ban chance", 60, 110, blue, 0.63);
                             gui->cText("97.4%%", childSize1.x - 45, 110, white, 0.63);
                             ImGui::PopStyleVar();
-
-                            gui->button("Load", 295, 30, 53.2, childSize.y - 50);
-
                             break;
                     }
-                
                 }
                 gui->endChild();
             }

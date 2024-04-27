@@ -18,14 +18,10 @@ namespace c_gui
     static char user[64] = "";
     static char pass[64] = "";
 
-    float rounding = 20.0f;
-
-    ImVec2 start = { 50, 50 };
-    ImVec2 img_size = { 30, 30 };
-
     bool button1Active = true;
     bool button2Active = false;
 
+    float rounding = 20.0f;
     static float textopp = 1;
     static float mtextopp = 1;
     static float oppacity = 0;
@@ -35,9 +31,10 @@ namespace c_gui
     static float buttonopp = 0;
     static float opacityText = 0;
 
+    static ImVec2 start = { 50, 50 };
+    static ImVec2 img_size = { 30, 30 };
     static ImVec4 blue = { 0.0157, 0.3608, 0.5882, textopp };
     static ImVec4 white = { 1, 1, 1, textopp };
-
     static ImVec4 red = { 0.9804, 0.2235, 0.2118, mtextopp };
     static ImVec4 green = { 0.0745, 0.7176, 0.4431, mtextopp };
 
