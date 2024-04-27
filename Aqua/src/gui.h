@@ -1,50 +1,48 @@
 #include "imgui.h"
-#include <iostream>
 #include "aqua_var.h"
 #include <D3dx9tex.h>
-#pragma comment(lib, "dxguid.lib")
+#include <iostream>
 #include <ctime>
+#pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "D3dx9")
 
 using namespace ImGui;
 
-static bool finished = false;
-
-static bool logged = false;
-static int page = 1;
-
-static char user[64] = "";
-static char pass[64] = "";
-
-float rounding = 20.0f;
-
-ImVec2 start = { 50, 50 };
-ImVec2 img_size = { 30, 30 };
-
-bool button1Active = true;
-bool button2Active = false;
-
-static float textopp = 1;
-static float mtextopp = 1;
-static float oppacity = 0;
-static float itemopp = 0;
-static float childopp = 0;
-static float mchildopp = 0;
-static float buttonopp = 0;
-static float opacityText = 0;
-
-static ImVec4 blue = { 0.0157, 0.3608, 0.5882, textopp };
-static ImVec4 white = { 1, 1, 1, textopp };
-
-static ImVec4 red = { 0.9804, 0.2235, 0.2118, mtextopp };
-static ImVec4 green = { 0.0745, 0.7176, 0.4431, mtextopp };
 
 namespace c_gui
 {
 
+    static bool logged = false;
+    static int page = 1;
+
+    static char user[64] = "";
+    static char pass[64] = "";
+
+    float rounding = 20.0f;
+
+    ImVec2 start = { 50, 50 };
+    ImVec2 img_size = { 30, 30 };
+
+    bool button1Active = true;
+    bool button2Active = false;
+
+    static float textopp = 1;
+    static float mtextopp = 1;
+    static float oppacity = 0;
+    static float itemopp = 0;
+    static float childopp = 0;
+    static float mchildopp = 0;
+    static float buttonopp = 0;
+    static float opacityText = 0;
+
+    static ImVec4 blue = { 0.0157, 0.3608, 0.5882, textopp };
+    static ImVec4 white = { 1, 1, 1, textopp };
+
+    static ImVec4 red = { 0.9804, 0.2235, 0.2118, mtextopp };
+    static ImVec4 green = { 0.0745, 0.7176, 0.4431, mtextopp };
+
     class gui 
 {
-
     public:
 
         DWORD window_flags = ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoSavedSettings;
@@ -100,15 +98,12 @@ namespace c_gui
                 textopp += 0.001;
                 textopp = 1;
             }
-
         }
 
         void noopp()
         {
             mchildopp = 0;
             buttonopp = 0;
-            //mtextopp = 0;
-            //textopp = 0;
         }
 
         void begin(const char* name, float X, float Y) 

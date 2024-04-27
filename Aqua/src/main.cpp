@@ -1,15 +1,12 @@
-#include "imgui.h"
 #include "imgui_impl_dx9.h"
 #include "imgui_impl_win32.h"
 #include <d3d9.h>
 #include <tchar.h>
-#include <D3dx9tex.h>
 #include "settings.h"
 #include "imgui_internal.h"
 #include "blur.hpp"
 #include "gui.h"
 #include <thread>
-#pragma comment(lib, "D3dx9")
 #pragma comment(lib,"d3dx9.lib")
 
 //CHANGE THE WALLPAPER!!! DOWNLOAD A COOL WALLPAPER, RENAME IT AS WALLPAPER.PNG AND MOVE IT TO C:\WALLPAPER
@@ -31,6 +28,8 @@ void ResetDevice();
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 using namespace ImGui;
+using namespace c_gui;
+
 IDirect3DTexture9* bg{ };
 
 static bool isDownloaded = false;
